@@ -1,0 +1,51 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: forzaboard
+  labels:
+    app: forzaboard
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: forzaboard
+  template:
+    metadata:
+      labels:
+        app: forzaboard
+    spec:
+      containers:
+        - name: nginx
+          image: nginx:stable
+          ports:
+            - containerPort: 80
+          volumeMounts:
+            - mountPath: /etc/nginx/conf.d
+              name: forzaboard-nginx-config
+            - mountPath: /code/static
+              name: django-nginx
+        - name: django
+          lifecycle:
+            postStart:
+              exec:
+                command: [ '/bin/sh', '-c', 'cp -a /code/static/. /code/static-shared/']
+          envFrom:
+            - secretRef:
+                name: django-secrets
+          image: <IMAGE>
+          ports:
+            - containerPort: 8000
+          volumeMounts:
+            - mountPath: /code/static-shared
+              name: django-nginx
+            - mountPath: /secrets
+              name: cockroachdb-cert
+      volumes:
+        - name: django-nginx
+          emptyDir: {}
+        - name: forzaboard-nginx-config
+          configMap:
+            name: forzaboard-nginx-config
+        - name: cockroachdb-cert
+          secret:
+            secretName: cockroachdb-cert

@@ -1,0 +1,17 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: forzaboard-ingress
+spec:
+  ingressClassName: nginx
+  rules:
+    - host: api.forzaboard.com
+      http:
+        paths:
+          - path: /
+            pathType: Prefix
+            backend:
+              service:
+                name: forzaboard-service
+                port:
+                  number: 80
