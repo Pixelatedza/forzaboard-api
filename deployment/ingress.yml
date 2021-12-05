@@ -2,10 +2,16 @@ apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
   name: forzaboard-ingress
+  annotations:
+    cert-manager.io/issuer: "letsencrypt-staging"
 spec:
+  tls:
+    - hosts:
+         - api.forzaboard.net
+      secretName: letsencrypt-staging
   ingressClassName: nginx
   rules:
-    - host: api.forzaboard.com
+    - host: api.forzaboard.net
       http:
         paths:
           - path: /
