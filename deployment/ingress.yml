@@ -7,7 +7,7 @@ metadata:
 spec:
   tls:
     - hosts:
-         - api.forzaboard.net
+      - api.forzaboard.net
       secretName: letsencrypt-staging
   ingressClassName: nginx
   rules:
