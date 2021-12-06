@@ -3,12 +3,12 @@ kind: Ingress
 metadata:
   name: forzaboard-ingress
   annotations:
-    cert-manager.io/issuer: "letsencrypt-staging"
+    cert-manager.io/cluster-issuer: "letsencrypt-prod"
 spec:
   tls:
     - hosts:
       - api.forzaboard.net
-      secretName: letsencrypt-staging
+      secretName: api-forzaboard-tls
   ingressClassName: nginx
   rules:
     - host: api.forzaboard.net
