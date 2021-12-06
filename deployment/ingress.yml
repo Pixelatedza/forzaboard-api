@@ -8,7 +8,7 @@ spec:
   tls:
     - hosts:
       - api.forzaboard.net
-      secretName: api-forzaboard-tls
+      secretName: api-forzaboard-tls-prod
   ingressClassName: nginx
   rules:
     - host: api.forzaboard.net
