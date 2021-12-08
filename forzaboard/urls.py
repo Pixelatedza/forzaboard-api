@@ -22,7 +22,26 @@ from rest_framework_simplejwt.views import (
     TokenObtainPairView,
     TokenRefreshView,
 )
+from rest_framework_simplejwt.serializers import (
+    TokenObtainPairSerializer
+)
 from events.urls import router as events_router
+
+
+# Token claims
+class JWTSerializer(TokenObtainPairSerializer):
+    @classmethod
+    def get_token(cls, user):
+        token = super().get_token(user)
+        token['permissions'] = list(user.get_user_permissions())
+        token['isSuperuser'] = user.is_superuser
+        token['isStaff'] = user.is_staff
+        token['lastLogin'] = user.last_login.isoformat()
+        return token
+
+
+class JWTView(TokenObtainPairView):
+    serializer_class = JWTSerializer
 
 # Serializers define the API representation.
 class UserSerializer(serializers.HyperlinkedModelSerializer):
@@ -47,6 +66,6 @@ urlpatterns = [
     path('api/', include(router.urls)),
     path('admin/', admin.site.urls),
     # path('api-auth/', include('rest_framework.urls'))
-    path('api/token', TokenObtainPairView.as_view(), name='token_obtain_pair'),
+    path('api/token', JWTView.as_view(), name='token_obtain_pair'),
     path('api/token/refresh', TokenRefreshView.as_view(), name='token_refresh'),
 ]
