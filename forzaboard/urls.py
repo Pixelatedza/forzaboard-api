@@ -63,7 +63,7 @@ router.register(r'users', UserViewSet)
 router.registry.extend(events_router.registry)
 
 urlpatterns = [
-    path('api/', include(router.urls)),
+    path('', include(router.urls)),
     path('admin/', admin.site.urls),
     # path('api-auth/', include('rest_framework.urls'))
     path('api/token', JWTView.as_view(), name='token_obtain_pair'),
