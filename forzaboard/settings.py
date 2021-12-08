@@ -29,7 +29,7 @@ SECRET_KEY = os.environ.get("DJANGO_SECRET_KEY", get_random_secret_key())
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = os.environ.get('DEBUG') == 'true'
 
-ALLOWED_HOSTS = ['api.forzaboard.net']
+ALLOWED_HOSTS = ['*'] if DEBUG else ['api.forzaboard.net']
 APPEND_SLASH = False
 
 
@@ -41,7 +41,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'django_cors_headers',
+    'corsheaders',
     'rest_framework',
     'events',
     'leaderboards',
@@ -59,7 +59,7 @@ MIDDLEWARE = [
 ]
 
 CORS_ALLOWED_ORIGINS = [
-    'forzaboard.net',
+    'https://forzaboard.net',
 ]
 
 ROOT_URLCONF = 'forzaboard.urls'
