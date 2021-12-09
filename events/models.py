@@ -23,6 +23,6 @@ class Location(models.Model):
         'Event',
         on_delete=models.SET_NULL,
         related_name='main_locations',
-        null=True
+        null=True,
         blank=True
     )
