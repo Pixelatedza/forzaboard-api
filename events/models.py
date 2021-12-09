@@ -24,4 +24,5 @@ class Location(models.Model):
         on_delete=models.SET_NULL,
         related_name='main_locations',
         null=True
+        blank=True
     )
