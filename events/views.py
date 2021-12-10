@@ -11,6 +11,7 @@ class EventViewSet(viewsets.ModelViewSet):
     queryset = Event.objects.all()
     serializer_class = EventSerializer
     permission_classes = [IsAuthenticatedOrReadOnly]
+    lookup_field = 'uuid'
 
 
 class EventKindViewSet(viewsets.ModelViewSet):
@@ -20,6 +21,8 @@ class EventKindViewSet(viewsets.ModelViewSet):
     queryset = EventKind.objects.all()
     serializer_class = EventKindSerializer
     permission_classes = [IsAuthenticatedOrReadOnly]
+    lookup_field = 'uuid'
+
 
 class LocationViewSet(viewsets.ModelViewSet):
     """
@@ -28,3 +31,4 @@ class LocationViewSet(viewsets.ModelViewSet):
     queryset = Location.objects.all()
     serializer_class = LocationSerializer
     permission_classes = [IsAuthenticatedOrReadOnly]
+    lookup_field = 'uuid'
