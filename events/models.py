@@ -5,6 +5,10 @@ from django.db import models
 class EventKind(models.Model):
     uuid = models.UUIDField(default=uuid.uuid4, editable=False)
     name = models.CharField(max_length=250)
+    
+    def __str__(self):
+        return self.name
+
 
 class Event(models.Model):
     uuid = models.UUIDField(default=uuid.uuid4, editable=False)
@@ -18,6 +22,10 @@ class Event(models.Model):
         on_delete=models.CASCADE,
     )
     active = models.BooleanField()
+    
+    def __str__(self):
+        return self.name
+
 
 class Location(models.Model):
     uuid = models.UUIDField(default=uuid.uuid4, editable=False)
@@ -31,3 +39,6 @@ class Location(models.Model):
         null=True,
         blank=True
     )
+    
+    def __str__(self):
+        return self.name
