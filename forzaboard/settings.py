@@ -32,6 +32,8 @@ DEBUG = os.environ.get('DEBUG') == 'true'
 ALLOWED_HOSTS = ['*'] if DEBUG else ['api.forzaboard.net']
 APPEND_SLASH = False
 
+# Customer user model
+AUTH_USER_MODEL = 'forza_auth.User'
 
 # Application definition
 INSTALLED_APPS = [
@@ -43,6 +45,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'corsheaders',
     'rest_framework',
+    'forza_auth',
     'events',
     'leaderboards',
 ]

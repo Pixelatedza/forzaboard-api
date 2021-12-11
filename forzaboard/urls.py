@@ -14,58 +14,15 @@ Including another URLconf
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
 from django.contrib import admin
-from django.contrib.auth.models import User
 from django.urls import path, include
-from rest_framework.permissions import IsAdminUser
-from rest_framework import routers, serializers, viewsets
-from rest_framework_simplejwt.views import (
-    TokenObtainPairView,
-    TokenRefreshView,
-)
-from rest_framework_simplejwt.serializers import (
-    TokenObtainPairSerializer
-)
-from events.urls import router as events_router
+from forzaboard.router import Router
 
-
-# Token claims
-class JWTSerializer(TokenObtainPairSerializer):
-    @classmethod
-    def get_token(cls, user):
-        token = super().get_token(user)
-        token['permissions'] = list(user.get_user_permissions())
-        token['isSuperuser'] = user.is_superuser
-        token['isStaff'] = user.is_staff
-        token['lastLogin'] = user.last_login.isoformat()
-        return token
-
-
-class JWTView(TokenObtainPairView):
-    serializer_class = JWTSerializer
-
-# Serializers define the API representation.
-class UserSerializer(serializers.HyperlinkedModelSerializer):
-    class Meta:
-        model = User
-        fields = ['url', 'username', 'email', 'is_staff']
-
-
-# ViewSets define the view behavior.
-class UserViewSet(viewsets.ModelViewSet):
-    permission_classes = [IsAdminUser]
-    queryset = User.objects.all()
-    serializer_class = UserSerializer
-
-
-# Routers provide an easy way of automatically determining the URL conf.
-router = routers.DefaultRouter(trailing_slash=False)
-router.register(r'users', UserViewSet)
-router.registry.extend(events_router.registry)
+router = Router(trailing_slash=False)
+router.include('forza_auth.urls')
+router.include('events.urls')
 
 urlpatterns = [
     path('', include(router.urls)),
     path('admin/', admin.site.urls),
-    # path('api-auth/', include('rest_framework.urls'))
-    path('auth/token', JWTView.as_view(), name='token_obtain_pair'),
-    path('auth/token/refresh', TokenRefreshView.as_view(), name='token_refresh'),
+    path('auth/', include('forza_auth.urls'))
 ]
