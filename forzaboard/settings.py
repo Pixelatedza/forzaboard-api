@@ -9,7 +9,7 @@ https://docs.djangoproject.com/en/3.2/topics/settings/
 For the full list of settings and their values, see
 https://docs.djangoproject.com/en/3.2/ref/settings/
 """
-
+from datetime import timedelta
 from pathlib import Path
 
 import dj_database_url
@@ -34,6 +34,10 @@ APPEND_SLASH = False
 
 # Customer user model
 AUTH_USER_MODEL = 'forza_auth.User'
+SIMPLE_JWT = {
+    'ACCESS_TOKEN_LIFETIME': timedelta(minutes=2),
+    'REFRESH_TOKEN_LIFETIME': timedelta(days=30),
+}
 
 # Application definition
 INSTALLED_APPS = [
