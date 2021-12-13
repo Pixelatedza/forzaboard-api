@@ -1,18 +1,12 @@
-import uuid
-
 from django.db import models
-
-class EventKind(models.Model):
-    uuid = models.UUIDField(default=uuid.uuid4, editable=False)
-    name = models.CharField(max_length=250)
-    
-    def __str__(self):
-        return self.name
+from forzaboard.models import UUIDModel
 
 
-class Event(models.Model):
-    uuid = models.UUIDField(default=uuid.uuid4, editable=False)
-    name = models.CharField(max_length=250)
+class EventKind(UUIDModel):
+    pass
+
+
+class Event(UUIDModel):
     location = models.ForeignKey(
         'Location',
         on_delete=models.CASCADE,
@@ -22,14 +16,9 @@ class Event(models.Model):
         on_delete=models.CASCADE,
     )
     active = models.BooleanField()
-    
-    def __str__(self):
-        return self.name
 
 
-class Location(models.Model):
-    uuid = models.UUIDField(default=uuid.uuid4, editable=False)
-    name = models.CharField(max_length=250)
+class Location(UUIDModel):
     x = models.IntegerField()
     y = models.IntegerField()
     main_event = models.ForeignKey(
@@ -39,6 +28,3 @@ class Location(models.Model):
         null=True,
         blank=True
     )
-    
-    def __str__(self):
-        return self.name

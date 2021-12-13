@@ -49,6 +49,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'corsheaders',
     'rest_framework',
+    'forzaboard',
     'forza_auth',
     'events',
     'leaderboards',
@@ -163,5 +164,9 @@ REST_FRAMEWORK = {
     ],
     'DEFAULT_PERMISSION_CLASSES': [
         'rest_framework.permissions.DjangoModelPermissionsOrAnonReadOnly'
+    ],
+    'DEFAULT_FILTER_BACKENDS': [
+        'forzaboard.filters.GenericRESTFilterBackend',
+        'rest_framework.filters.OrderingFilter'
     ]
 }
