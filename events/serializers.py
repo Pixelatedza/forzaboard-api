@@ -1,7 +1,7 @@
 from rest_framework import serializers
 
 from events.models import Event, EventKind, Location
-from forzaboard.serializers import UUIDRelatedField, UUIDModelSerializer
+from forzaboard.serializers import UUIDModelSerializer
 
 
 class EventKindSerializer(UUIDModelSerializer):
@@ -19,7 +19,6 @@ class EventSerializer(UUIDModelSerializer):
 
 
 class LocationSerializer(UUIDModelSerializer):
-    serializer_related_field = UUIDRelatedField
 
     class Meta:
         model = Location

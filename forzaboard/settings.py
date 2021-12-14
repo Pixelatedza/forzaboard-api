@@ -51,6 +51,7 @@ INSTALLED_APPS = [
     'rest_framework',
     'forzaboard',
     'forza_auth',
+    'forza_cars',
     'events',
     'leaderboards',
 ]

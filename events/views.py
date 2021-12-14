@@ -1,5 +1,5 @@
 from rest_framework import viewsets
-from rest_framework.permissions import IsAuthenticatedOrReadOnly
+from rest_framework.permissions import DjangoModelPermissionsOrAnonReadOnly
 from events.models import Event, EventKind, Location
 from events.serializers import EventSerializer, EventKindSerializer, LocationSerializer
 
@@ -10,7 +10,7 @@ class EventViewSet(viewsets.ModelViewSet):
     """
     queryset = Event.objects.all()
     serializer_class = EventSerializer
-    permission_classes = [IsAuthenticatedOrReadOnly]
+    permission_classes = [DjangoModelPermissionsOrAnonReadOnly]
     lookup_field = 'uuid'
 
 
@@ -20,7 +20,7 @@ class EventKindViewSet(viewsets.ModelViewSet):
     """
     queryset = EventKind.objects.all()
     serializer_class = EventKindSerializer
-    permission_classes = [IsAuthenticatedOrReadOnly]
+    permission_classes = [DjangoModelPermissionsOrAnonReadOnly]
     lookup_field = 'uuid'
 
 
@@ -30,5 +30,5 @@ class LocationViewSet(viewsets.ModelViewSet):
     """
     queryset = Location.objects.all()
     serializer_class = LocationSerializer
-    permission_classes = [IsAuthenticatedOrReadOnly]
+    permission_classes = [DjangoModelPermissionsOrAnonReadOnly]
     lookup_field = 'uuid'
