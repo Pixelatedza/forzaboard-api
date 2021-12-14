@@ -5,14 +5,15 @@ from leaderboards.models import Leaderboard, Record
 
 class LeaderboardSerializer(UUIDModelSerializer):
 
-    user = serializers.StringRelatedField(read_only=True)
-
     class Meta:
         model = Leaderboard
         fields = ['event']
 
 
 class RecordSerializer(UUIDModelSerializer):
+
+    user = serializers.StringRelatedField(read_only=True)
+
     class Meta:
         model = Record
         fields = [

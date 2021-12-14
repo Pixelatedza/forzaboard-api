@@ -7,6 +7,7 @@ from forzaboard.serializers import UUIDModelSerializer
 class EventKindSerializer(UUIDModelSerializer):
     class Meta:
         model = EventKind
+        fields = []
 
 
 class EventSerializer(UUIDModelSerializer):
