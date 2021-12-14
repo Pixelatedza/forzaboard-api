@@ -19,7 +19,9 @@ from forzaboard.router import Router
 
 router = Router(trailing_slash=False)
 router.include('forza_auth.urls')
+router.include('forza_cars.urls')
 router.include('events.urls')
+router.include('leaderboards.urls')
 
 urlpatterns = [
     path('', include(router.urls)),

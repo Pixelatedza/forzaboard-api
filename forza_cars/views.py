@@ -9,7 +9,7 @@ class BrandViewSet(viewsets.ModelViewSet):
     A simple ViewSet for viewing and editing brands.
     """
     queryset = Brand.objects.all()
-    serializer_class = CarSerializer
+    serializer_class = BrandSerializer
     permission_classes = [DjangoModelPermissionsOrAnonReadOnly]
     lookup_field = 'uuid'
 
@@ -19,6 +19,6 @@ class CarViewSet(viewsets.ModelViewSet):
     A simple ViewSet for viewing and editing cars.
     """
     queryset = Car.objects.all()
-    serializer_class = BrandSerializer
+    serializer_class = CarSerializer
     permission_classes = [DjangoModelPermissionsOrAnonReadOnly]
     lookup_field = 'uuid'

@@ -7,6 +7,7 @@ class BrandSerializer(UUIDModelSerializer):
 
     class Meta:
         model = Brand
+        fields = []
 
 
 class CarSerializer(UUIDModelSerializer):
