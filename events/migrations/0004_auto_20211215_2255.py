@@ -31,7 +31,7 @@ class Migration(migrations.Migration):
         migrations.AddField(
             model_name='location',
             name='kind',
-            field=models.ForeignKey(default=1, on_delete=django.db.models.deletion.CASCADE, to='events.eventkind'),
+            field=models.ForeignKey(default=717884376896569345, on_delete=django.db.models.deletion.CASCADE, to='events.eventkind'),
             preserve_default=False,
         ),
         migrations.AddField(
