@@ -1,7 +1,6 @@
 from django.core.exceptions import ObjectDoesNotExist
 from django.utils.translation import gettext_lazy as _
 from rest_framework import serializers
-from forzaboard.models import UUIDModel
 
 
 class UUIDRelatedField(serializers.RelatedField):
@@ -27,14 +26,3 @@ class UUIDRelatedField(serializers.RelatedField):
 
 class UUIDModelSerializer(serializers.ModelSerializer):
     serializer_related_field = UUIDRelatedField
-
-    def get_field_names(self, *args, **kwargs):
-        fields = super().get_field_names(*args, **kwargs)
-        Meta = getattr(self, 'Meta', None)
-        model = getattr(Meta, 'model', None)
-        assert hasattr(model, 'uuid'), 'Model must have a "uuid" field'
-        assert issubclass(model, UUIDModel), 'Model must be subclass of forzaboard.UUIDModel'
-
-        if hasattr(model, 'name'):
-            fields += ['name']
-        return fields + ['uuid']

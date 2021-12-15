@@ -10,5 +10,5 @@ class RecordSerializer(UUIDModelSerializer):
 
     class Meta:
         model = Record
-        exclude = 'id',
+        exclude = ['id']
 

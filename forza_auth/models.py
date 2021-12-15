@@ -1,3 +1,4 @@
+import uuid
 from django.contrib.auth.validators import UnicodeUsernameValidator
 from django.utils.translation import gettext_lazy as _
 from django.db import models
@@ -11,6 +12,7 @@ def get_default_username():
 class User(AbstractUser):
     # Overriding the default username so that it is no longer unique
     # but still works exactly like the existing one.
+    uuid = models.UUIDField(default=uuid.uuid4, editable=False)
     username_validator = UnicodeUsernameValidator()
     username = models.CharField(
         _('username'),

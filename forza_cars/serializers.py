@@ -7,7 +7,7 @@ class BrandSerializer(UUIDModelSerializer):
 
     class Meta:
         model = Brand
-        fields = []
+        exclude = ['id']
 
 
 class CarSerializer(UUIDModelSerializer):
@@ -16,4 +16,4 @@ class CarSerializer(UUIDModelSerializer):
 
     class Meta:
         model = Car
-        fields = ['brand']
+        exclude = ['id']
