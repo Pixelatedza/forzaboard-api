@@ -33,7 +33,8 @@ class UUIDModelSerializer(serializers.ModelSerializer):
         Meta = getattr(self, 'Meta', None)
         model = getattr(Meta, 'model', None)
         assert hasattr(model, 'uuid'), 'Model must have a "uuid" field'
-        assert hasattr(model, 'name'), 'Model must have a "name" field'
         assert issubclass(model, UUIDModel), 'Model must be subclass of forzaboard.UUIDModel'
 
-        return fields + ['uuid', 'name']
+        if hasattr(model, 'name'):
+            fields += ['name']
+        return fields + ['uuid']

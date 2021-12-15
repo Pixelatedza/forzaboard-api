@@ -1,17 +1,7 @@
 from rest_framework import viewsets
 from rest_framework.permissions import DjangoModelPermissionsOrAnonReadOnly
-from leaderboards.models import Leaderboard, Record
-from leaderboards.serializers import RecordSerializer, LeaderboardSerializer
-
-
-class LeaderboardViewSet(viewsets.ModelViewSet):
-    """
-    A simple ViewSet for viewing and editing leaderboards.
-    """
-    queryset = Leaderboard.objects.all()
-    serializer_class = LeaderboardSerializer
-    permission_classes = [DjangoModelPermissionsOrAnonReadOnly]
-    lookup_field = 'uuid'
+from leaderboards.models import Record
+from leaderboards.serializers import RecordSerializer
 
 
 class RecordViewSet(viewsets.ModelViewSet):

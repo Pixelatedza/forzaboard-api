@@ -16,7 +16,7 @@ class EventSerializer(UUIDModelSerializer):
 
     class Meta:
         model = Event
-        fields = ['location', 'kind', 'active']
+        exclude = ['id']
 
 
 class LocationSerializer(UUIDModelSerializer):

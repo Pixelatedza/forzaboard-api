@@ -5,25 +5,20 @@ from forza_cars.models import Car
 from forzaboard.models import UUIDModel
 
 
-class Leaderboard(UUIDModel):
-    event = models.ForeignKey(
-        Event,
-        on_delete=models.CASCADE,
-        related_name='leaderboards',
-    )
-
-
 class Record(UUIDModel):
+
+    # Record does not need a name
+    name = None
 
     # TODO: Consider making this it's own model.
     class Platforms(models.IntegerChoices):
         PC = 1
         XBOX = 2
 
-    leaderboard = models.ForeignKey(
-        'Leaderboard',
+    event = models.ForeignKey(
+        Event,
         on_delete=models.CASCADE,
-        related_name='records',
+        related_name='leaderboards',
     )
     value = models.PositiveIntegerField()
     user = models.ForeignKey(
@@ -50,3 +45,6 @@ class Record(UUIDModel):
         null=True
     )
     created = models.DateTimeField(auto_now_add=True)
+
+    def __str__(self):
+        return self.event.name + ' ' + self.user.username
