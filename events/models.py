@@ -11,10 +11,6 @@ class Event(UUIDModel):
         'Location',
         on_delete=models.CASCADE,
     )
-    kind = models.ForeignKey(
-        'EventKind',
-        on_delete=models.CASCADE,
-    )
     active = models.BooleanField(
         default=True,
         help_text='Delete an event by marking it inactive.'
@@ -22,10 +18,6 @@ class Event(UUIDModel):
     open = models.BooleanField(
         default=True,
         help_text='Whether records can still be added to an event or not.'
-    )
-    seasonal = models.BooleanField(
-        default=False,
-        help_text='Is this a seasonal event or not'
     )
     description = models.CharField(
         max_length=250,
@@ -68,10 +60,12 @@ class Event(UUIDModel):
 class Location(UUIDModel):
     x = models.IntegerField()
     y = models.IntegerField()
-    main_event = models.ForeignKey(
-        'Event',
-        on_delete=models.SET_NULL,
-        related_name='main_locations',
-        null=True,
-        blank=True
+    kind = models.ForeignKey(
+        'EventKind',
+        on_delete=models.CASCADE,
     )
+    seasonal = models.BooleanField(
+        default=False,
+        help_text='Is this a seasonal event or not'
+    )
+    active = models.BooleanField(default=True)

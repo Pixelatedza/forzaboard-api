@@ -5,14 +5,13 @@ from forzaboard.serializers import UUIDModelSerializer
 
 
 class EventKindSerializer(UUIDModelSerializer):
+
     class Meta:
         model = EventKind
-        fields = []
+        exclude = ['id']
 
 
 class EventSerializer(UUIDModelSerializer):
-
-    kind = serializers.StringRelatedField(read_only=True)
 
     class Meta:
         model = Event
@@ -21,6 +20,8 @@ class EventSerializer(UUIDModelSerializer):
 
 class LocationSerializer(UUIDModelSerializer):
 
+    kind = serializers.StringRelatedField(read_only=True)
+
     class Meta:
         model = Location
-        fields = ['x', 'y', 'main_event']
+        exclude = ['id']
