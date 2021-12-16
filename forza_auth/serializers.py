@@ -9,8 +9,6 @@ class JWTSerializer(TokenObtainPairSerializer):
     @classmethod
     def get_token(cls, user):
         token = super().get_token(user)
-        if 'user_id' in token:
-            del token['user_id']
         token['email'] = user.email
         token['username'] = user.username
         token['permissions'] = list(user.get_user_permissions())
