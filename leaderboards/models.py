@@ -31,6 +31,11 @@ class Record(UUIDModel):
         on_delete=models.CASCADE,
         related_name='records'
     )
+    share_code = models.CharField(
+        max_length=50,
+        null=True,
+        blank=True
+    )
     pi = models.IntegerField(
         null=True,
         blank=True,
