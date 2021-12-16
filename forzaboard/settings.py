@@ -35,8 +35,9 @@ APPEND_SLASH = False
 # Customer user model
 AUTH_USER_MODEL = 'forza_auth.User'
 SIMPLE_JWT = {
-    'ACCESS_TOKEN_LIFETIME': timedelta(minutes=2),
+    'ACCESS_TOKEN_LIFETIME': timedelta(minutes=60),
     'REFRESH_TOKEN_LIFETIME': timedelta(days=30),
+    'USER_ID_FIELD': 'uuid',
 }
 
 # Application definition
