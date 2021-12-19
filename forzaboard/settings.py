@@ -114,7 +114,7 @@ else:
             "HOST": "postgres",
             "NAME": "forzaboard",
             "ENGINE": "django.db.backends.postgresql_psycopg2",
-            "USERNAME": "postgres",
+            "USER": "postgres",
             "PASSWORD": os.getenv("DB_PASS", False),
         }
     }
