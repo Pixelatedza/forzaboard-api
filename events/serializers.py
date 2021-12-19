@@ -18,10 +18,13 @@ class EventSerializer(UUIDModelSerializer):
         exclude = ['id']
 
 
-class LocationSerializer(UUIDModelSerializer):
-
-    kind = serializers.StringRelatedField(read_only=True)
+class LocationPOSTSerializer(UUIDModelSerializer):
 
     class Meta:
         model = Location
         exclude = ['id']
+
+
+class LocationGETSerializer(LocationPOSTSerializer):
+    kind = serializers.StringRelatedField(read_only=True)
+
