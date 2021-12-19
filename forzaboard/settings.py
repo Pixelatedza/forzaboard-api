@@ -106,11 +106,11 @@ if DATABASE_URL is False:
     }
 else:
     DATABASES = {
-        "default": dj_database_url.config(
+        "cr": dj_database_url.config(
             default=os.environ.get("DATABASE_URL"),
             engine='django_cockroachdb',
         ),
-        "local": {
+        "default": {
             "HOST": "postgres",
             "NAME": "forzaboard",
             "ENGINE": "django.db.backends.postgresql_psycopg2",
