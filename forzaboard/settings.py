@@ -110,6 +110,13 @@ else:
             default=os.environ.get("DATABASE_URL"),
             engine='django_cockroachdb',
         ),
+        "local": {
+            "HOST": "postgres",
+            "DATABASE": "forzaboard",
+            "ENGINE": "django.db.backends.postgresql_psycopg2",
+            "USERNAME": "postgres",
+            "PASSWORD": os.getenv("DB_PASS", False),
+        }
     }
 
 # Password validation
