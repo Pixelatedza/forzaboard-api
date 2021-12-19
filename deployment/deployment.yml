@@ -29,6 +29,12 @@ spec:
             postStart:
               exec:
                 command: [ '/bin/sh', '-c', 'cp -a /code/static/. /code/static-shared/']
+          env:
+            - name: DB_PASS
+              valueFrom:
+                secretKeyRef:
+                  name: postgres-secret
+                  key: superUserPassword
           envFrom:
             - secretRef:
                 name: django-secrets
