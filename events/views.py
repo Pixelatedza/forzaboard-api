@@ -1,7 +1,7 @@
 from rest_framework import viewsets
 from rest_framework.permissions import DjangoModelPermissionsOrAnonReadOnly
 from events.models import Event, EventKind, Location
-from events.serializers import EventSerializer, EventKindSerializer, LocationSerializer
+from events.serializers import EventSerializer, EventKindSerializer, LocationGETSerializer, LocationPOSTSerializer
 
 
 class EventViewSet(viewsets.ModelViewSet):
@@ -29,6 +29,10 @@ class LocationViewSet(viewsets.ModelViewSet):
     A simple ViewSet for viewing and editing event kinds.
     """
     queryset = Location.objects.all()
-    serializer_class = LocationSerializer
     permission_classes = [DjangoModelPermissionsOrAnonReadOnly]
     lookup_field = 'uuid'
+
+    def get_serializer_class(self):
+        if self.action == 'list' or self.action == 'retrieve':
+            return LocationGETSerializer
+        return LocationPOSTSerializer
