@@ -3,12 +3,15 @@ from forzaboard.serializers import UUIDModelSerializer
 from leaderboards.models import Record
 
 
-class RecordSerializer(UUIDModelSerializer):
-
-    user = serializers.StringRelatedField(read_only=True)
-    car = serializers.StringRelatedField(read_only=True)
+class RecordPOSTSerializer(UUIDModelSerializer):
 
     class Meta:
         model = Record
         exclude = ['id']
+
+
+class RecordGETSerializer(RecordPOSTSerializer):
+    user = serializers.StringRelatedField(read_only=True)
+    car = serializers.StringRelatedField(read_only=True)
+
 
