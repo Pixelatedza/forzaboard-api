@@ -26,10 +26,11 @@ class JWTView(TokenObtainPairView):
 # User serializers
 class UserSerializer(serializers.HyperlinkedModelSerializer):
     password = serializers.CharField(write_only=True)
+    email = serializers.EmailField(write_only=True)
 
     class Meta:
         model = get_user_model()
-        fields = ['username', 'uuid', 'password']
+        fields = ['username', 'uuid', 'password', 'email']
 
     def create(self, validated_data):
 
