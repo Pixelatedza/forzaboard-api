@@ -12,7 +12,6 @@ https://docs.djangoproject.com/en/3.2/ref/settings/
 from datetime import timedelta
 from pathlib import Path
 
-import dj_database_url
 from django.core.management.utils import get_random_secret_key
 import os
 
@@ -106,10 +105,6 @@ if DATABASE_URL is False:
     }
 else:
     DATABASES = {
-        "cr": dj_database_url.config(
-            default=os.environ.get("DATABASE_URL"),
-            engine='django_cockroachdb',
-        ),
         "default": {
             "HOST": "postgres",
             "NAME": "forzaboard",
