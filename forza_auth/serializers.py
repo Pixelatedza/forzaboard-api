@@ -1,4 +1,5 @@
 from django.contrib.auth import get_user_model
+from django.contrib.auth.models import Group
 from rest_framework import serializers
 from rest_framework_simplejwt.views import TokenObtainPairView
 from rest_framework_simplejwt.serializers import TokenObtainPairSerializer
@@ -11,7 +12,7 @@ class JWTSerializer(TokenObtainPairSerializer):
         token = super().get_token(user)
         token['email'] = user.email
         token['username'] = user.username
-        token['permissions'] = list(user.get_user_permissions())
+        token['permissions'] = list(user.get_all_permissions())
         token['isSuperuser'] = user.is_superuser
         token['isStaff'] = user.is_staff
         if user.last_login is not None:
@@ -33,8 +34,9 @@ class UserSerializer(serializers.HyperlinkedModelSerializer):
         fields = ['username', 'uuid', 'password', 'email']
 
     def create(self, validated_data):
-
         user = get_user_model()(**validated_data)
         user.set_password(validated_data['password'])
         user.save()
+        group = Group.objects.get(name='users')
+        user.groups.add(group)
         return user

@@ -1,6 +1,7 @@
 from rest_framework import viewsets
 from rest_framework.permissions import DjangoModelPermissionsOrAnonReadOnly
 from leaderboards.models import Record
+from leaderboards.permissions import IsOwnRecordOrReadOnly
 from leaderboards.serializers import RecordGETSerializer, RecordPOSTSerializer
 
 
@@ -9,7 +10,10 @@ class RecordViewSet(viewsets.ModelViewSet):
     A simple ViewSet for viewing and records.
     """
     queryset = Record.objects.all()
-    permission_classes = [DjangoModelPermissionsOrAnonReadOnly]
+    permission_classes = [
+        DjangoModelPermissionsOrAnonReadOnly,
+        IsOwnRecordOrReadOnly,
+    ]
     lookup_field = 'uuid'
 
     def get_serializer_class(self):
